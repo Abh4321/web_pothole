@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> RoadGuard AI: Smart Pothole Detection System </title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showPage('home')">Home</a></li>
+            <li><a href="#" onclick="showPage('detection')">Live Detection</a></li>
+            <li><a href="#" onclick="showPage('statistics')">Statistics</a></li>
+            <li><a href="#" onclick="showPage('about')">About</a></li>
+        </ul>
+    </nav>
+    <div class="heading"> <h1>RoadGuard AI: Smart Pothole Detection System</h1></div>
+    <div class="container" id="pages">
+        <div id="home" class="active">
+            <img src="{{ url_for('static', filename='images/1.png') }}" alt="Smart city with AI-powered road maintenance" class="hero-image">
+            <h2 class="text-center">Welcome to RoadGuard AI</h2>
+            <p class="text-center">Experience the future of road maintenance with our AI-powered pothole detection system. Identify and track road damage in real-time, ensuring safer streets for everyone.</p>
+            <div class="grid">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/19178.jpg') }}" alt="AI analyzing road conditions" class="feature-image">
+                    <h3>🧠 Cutting-Edge AI</h3>
+                    <p>Our advanced algorithms analyze video feeds to accurately identify and track potholes, preventing double-counting and ensuring precise data collection.</p>
+                </div>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/4935548.jpg') }}" alt="Real-time road condition updates" class="feature-image">
+                    <h3>⚡ Real-Time Insights</h3>
+                    <p>Get instant updates on road conditions, enabling quick responses to emerging issues and more efficient allocation of maintenance resources.</p>
+                </div>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/Screenshot 2024-10-05 213721.png') }}" alt="Data-driven urban planning" class="feature-image">
+                    <h3>📊 Data-Driven Decisions</h3>
+                    <p>Leverage comprehensive statistics and trends to make informed decisions about road repairs and urban planning initiatives.</p>
+                </div>
+            </div>
+        </div>
+        <div id="detection">
+            <h2 class="text-center">Live Pothole Detection</h2>
+            <div id="videoContainer">
+                <img id="videoFeed" src="{{ url_for('video_feed') }}" alt="Video feed">
+                <div id="overlay">Status: Idle</div>
+            </div>
+            <div id="controls">
+                <button id="startBtn" onclick="startDetection()">Start Detection</button>
+                <button id="stopBtn" onclick="stopDetection()" disabled>Stop Detection</button>
+            </div>
+            <div id="count">
+                <div id="countText">Ready to start detection</div>
+                <div id="progressBar">
+                    <div id="progressFill"></div>
+                </div>
+            </div>
+        </div>
+        <div id="statistics">
+            <h2 class="text-center">Pothole Detection Analytics</h2>
+            <p class="text-center">Explore our comprehensive data on pothole detection, helping you make informed decisions for road maintenance and urban planning.</p>
+            <div class="grid">
+                <div class="card">
+                    <h3>📈 Hourly Trends</h3>
+                    <canvas id="hourlyChart"></canvas>
+                </div>
+                <div class="card">
+                    <h3>📅 Daily Overview</h3>
+                    <canvas id="dailyChart"></canvas>
+                </div>
+            </div>
+            <div class="grid" style="margin-top: 2rem;">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/pothole.png') }}" alt="Map of pothole hotspots" class="feature-image">
+                    <h3>🗺️ Pothole Hotspots</h3>
+                    <p>Visualize areas with high concentrations of potholes to prioritize maintenance efforts effectively.</p>
+                </div>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/historical.png') }}" alt="Historical data trends" class="feature-image">
+                    <h3>📊 Historical Trends</h3>
+                    <p>Analyze long-term data to identify patterns and predict future road maintenance needs.</p>
+                </div>
+            </div>
+        </div>
+        <div id="about">
+            <h2 class="text-center">About RoadGuard AI</h2>
+            <img src="{{ url_for('static', filename='images/ai.jpg') }}" alt="Team working on AI-powered road maintenance" class="about-image">
+            <p>Our state-of-the-art pothole detection system harnesses the power of machine learning to revolutionize road maintenance. By employing advanced computer vision techniques, we provide accurate, real-time data on road conditions, enabling smarter, more efficient urban planning and maintenance strategies.</p>
+            <h3>Key Advantages:</h3>
+            <ul class="key-advantages">
+                <li>Real-time detection using high-definition video feeds</li>
+                <li>Intelligent tracking to eliminate duplicate reports</li>
+                <li>Minute-by-minute analysis for immediate response capabilities</li>
+                <li>Comprehensive data visualization for long-term planning</li>
+            </ul>
+            <p>Join us in creating safer, smoother roads for communities everywhere. For partnerships or more information, reach out to our dedicated team of experts.</p>
+            <div class="grid">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/tech.jpg') }}" alt="RoadGuard AI in action" class="feature-image">
+                    <h3>💻 Our Technology</h3>
+                    <p>Learn more about the cutting-edge AI and computer vision technology powering RoadGuard AI.</p>
+                </div>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/hole-in-the-asphalt-road-repair-vector-43608188.jpg') }}" alt="RoadGuard AI team" class="feature-image">
+                    <h3>AI-Driven Innovation</h3>
+                    <p>RoadGuard AI is at the forefront of leveraging artificial intelligence for public safety. By combining real-time detection and advanced analytics, we ensure a proactive approach to maintaining road infrastructure.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/scripts.js"></script>
+</body>
+</html>
